@@ -1,0 +1,14 @@
+NIL
+/* Starts dribbling to /sattchgithub.io/fourier/example1/fig/fouriertx2.txt (2019/8/14, 09:58:38).*/
+(%i3) powerdisp:false
+(%i4) display2d:false
+(%i5) linel:1000
+(%i6) load("mactex-utilities.lisp")
+(%i7) tx2:disp(tex((4*sin((%pi*n)/2))/(%pi*n)))
+$$\frac{4\,\sin \left(\frac{\pi\,n}{2}\right)}{\pi\,n}$$
+false
+
+(%i8) disp(tx2)
+done
+
+(%i9) closefile()

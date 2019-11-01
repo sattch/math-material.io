@@ -1,0 +1,9 @@
+writefile("/sattchgithub.io/fourier/example1/fig/fouriertx2.txt")$/*##*/
+powerdisp:false$/*##*/
+display2d:false$/*##*/
+linel:1000$/*##*/
+load("mactex-utilities.lisp")$/*##*/
+tx2:disp(tex((4*sin((%pi*n)/2))/(%pi*n)))$/*##*/
+disp(tx2)$/*##*/
+closefile()$/*##*/
+quit()$/*##*/

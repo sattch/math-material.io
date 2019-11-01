@@ -1,0 +1,14 @@
+NIL
+/* Starts dribbling to /sattchgithub.io/fourier/example1/fig/fouriertx3.txt (2019/8/14, 09:51:49).*/
+(%i3) powerdisp:false
+(%i4) display2d:false
+(%i5) linel:1000
+(%i6) load("mactex-utilities.lisp")
+(%i7) tx3:disp(tex(0))
+$$0$$
+false
+
+(%i8) disp(tx3)
+done
+
+(%i9) closefile()

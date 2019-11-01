@@ -1,0 +1,61 @@
+Ketinit();
+Setparent(Cdyname()+"fig");
+Setketcindyjs(["Color=lightgray"]);
+
+Setwindow([-10,10],[-4,7]);
+Slider("N",[-5,YMIN-0.5],[5,YMIN-0.5]);
+forall(0..5,
+  Listplot("m"+text(#),[[-#,YMIN-0.5-0.05],[-#,YMIN-0.5+0.05]]);
+  Expr([-#,YMIN-0.5-0.05],"s",text(-#+6));
+);
+forall(1..5,
+  Listplot("p"+text(#),[[#,YMIN-0.5-0.05],[#,YMIN-0.5+0.05]]);
+  Expr([#,YMIN-0.5-0.05],"s",text(#*10));
+);
+
+defL=[
+ "-1",[-2,-1],1,
+ "1",[-1,1],1,
+ "-1",[1,2],1
+];
+
+if(round(N.x)>0,
+  nn=round(N.x)*10;
+,
+  nn=round(N.x)+6;
+);
+PfL=Periodfun("a",defL,"x",["Con=da"]);
+f0=PfL_1;
+period=PfL_2;
+Htickmark([-10,"-10",-9,"",-8,"",-7,"",-5,"-5",-4,"",-3,"",-2,"",-1,"",1,"",2,"",3,"",4,"",5,"5",6,"",7,"",8,"",9,"",10,"10"]);
+Vtickmark([-2,"-2",2,"2"]);
+
+Ch=[];
+if(Contains(Ch,1),
+ cmdL=Concat(Mxbatch("pdefourier.mac"),[
+  "f0(x):="+f0,[],
+  "c:fouriercoeff",["f0(x)","x",period],
+  "c:c[1]",[],
+  "c[1]::c[2]::c[3]",[]
+ ]);
+ make="";
+ CalcbyM("ans",cmdL,[make,"Err=n"]);
+ Ketcindyjsdata(["ans",ans]); //no ketjs off
+ make="";
+ Mxtex("1",ans_1,[make,"Disp=n"]);
+ Mxtex("2",ans_2,[make,"Disp=n"]);
+ Mxtex("3",ans_3,[make,"Disp=n"]);
+ Ketcindyjsdata(["tx1",tx1]); //no ketjs off
+ Ketcindyjsdata(["tx2",tx2]); //no ketjs off
+ Ketcindyjsdata(["tx3",tx3]); //no ketjs off
+ Fourierseries("1",ans,period,nn,"x",["Num=500","Color=blue"]);
+ Expr([-10,6.5],"e","a_0="+tx1,["Size=1.5"]);
+ Expr([-10,5],"e","a_n="+tx2,["Size=1.5"]);
+ Expr([-10,3.5],"e","b_n="+tx3,["Size=1.5"]);
+ Expr([9,6.5],"w","n="+nn,["Size=1.2"]);
+);
+
+Figpdf();
+Windispg();
+
+//Help("Htickmark");
