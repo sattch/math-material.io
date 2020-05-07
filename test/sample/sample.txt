@@ -1,0 +1,31 @@
+Ketinit();
+Setparent(Cdyname()+"fig");
+Setketcindyjs(["Sc=1.2","Color=lightgray"]);
+Setax(["","t","","y","","",""]);
+Expreq(eq):=(
+ regional(str);
+ str="\displaystyle "+eq;
+ str=Assign(str,["L.x",L.x,"G.x",G.x]);
+ str=replace(str,"y''","\frac{d^2y}{dt^2}");
+ str=replace(str,"y'","\frac{dy}{dt}");
+ str=replace(str,"*","");
+ str;
+);
+
+Slider("C",[0,-5],[0,5],["Size=3"]);
+Slider("G",[0,-5.5],[10,-5.5]);
+Slider("L",[0,-6],[10,-6]);
+
+eq1="y'=y";
+eq2="y''=-L.x*y'-G.x*y";
+eq3="[x,y]'=[x*(1-y),0.3*y*(x-1)]";
+
+//Deqplot("1",eq1,"x",0,1); 
+Deqplot("2",eq2,"t=[0,XMAX]",0,[C.y,0],["Num=200"]); 
+//Deqplot("3",eq3,"t=[0,20]",0,A,["Num=200"]); 
+
+str=Expreq("y''+L.x*y'+G.x*y=0");
+Expr([M,"e",str],["size->20"]);
+
+Figpdf();
+Windispg();
